@@ -1,7 +1,7 @@
 import http from 'http';
 import 'dotenv/config';
 
-import { getUsers, getUser, createUser } from './controllers/controllers';
+import { getUsers, getUser, createUser, updateUser } from './controllers/controllers';
 
 const server = http.createServer((req, res) => {
   if (req.url === '/api/users' && req.method === 'GET') {
@@ -11,7 +11,10 @@ const server = http.createServer((req, res) => {
     getUser(req, res, id)
   } else if (req.url === '/api/users' && req.method === 'POST') {
     createUser(req, res)
-} else {
+  } else if (req.url && req.url.match(/\/api\/users\/\w+/) && req.method === 'PUT') {
+    const id = req.url.split('/')[3]
+    updateUser(req, res, id)
+  } else {
     res.writeHead(404, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({ message: 'Route Not Found' }));
   }
