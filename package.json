@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:prod": "node src/index.ts",
+    "start:dev": "nodemon"
   },
   "repository": {
     "type": "git",
@@ -17,8 +18,14 @@
   },
   "homepage": "https://github.com/Aiyoy/crud-ari#readme",
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "nodemon": "^2.0.16",
+    "prettier": "2.7.0",
     "ts-node": "^10.8.1",
     "typescript": "^4.7.3"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "uuid": "^8.3.2"
   }
 }
