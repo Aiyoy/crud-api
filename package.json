@@ -2,9 +2,9 @@
   "name": "crud-api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "start:prod": "node src/index.ts",
+    "start:prod": "tsc && node dist/index.js",
     "start:dev": "nodemon"
   },
   "repository": {
