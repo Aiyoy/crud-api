@@ -118,14 +118,14 @@ function deleteUser(req, res, id) {
                 res.writeHead(400, { 'Content-Type': 'application/json' });
                 res.end(JSON.stringify({ message: 'Invalid ID' }));
             }
-            else if (!user) {
-                res.writeHead(404, { 'Content-Type': 'application/json' });
-                res.end(JSON.stringify({ message: 'User Not Found' }));
-            }
-            else {
+            else if (user) {
                 yield (0, userModel_1.remove)(id);
                 res.writeHead(204, { 'Content-Type': 'application/json' });
                 res.end(JSON.stringify({ message: `User ${id} removed` }));
+            }
+            else {
+                res.writeHead(404, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ message: 'User Not Found' }));
             }
         }
         catch (error) {

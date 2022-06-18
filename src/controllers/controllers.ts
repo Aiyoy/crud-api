@@ -101,13 +101,13 @@ async function deleteUser(req: IncomingMessage, res: ServerResponse, id: string)
     if (!validate(id)) {
       res.writeHead(400, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify({ message: 'Invalid ID' }));
-    } else if(!user) {
-      res.writeHead(404, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify({ message: 'User Not Found' }));
-    } else {
+    } else if(user) {
       await remove(id);
       res.writeHead(204, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify({ message: `User ${id} removed` }));
+      res.end(JSON.stringify({ message: `User ${id} removed` }))
+    } else {
+      res.writeHead(404, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ message: 'User Not Found' }));
     }
   } catch (error) {
     res.writeHead(500, { 'Content-Type': 'application/json' });
