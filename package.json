@@ -2,9 +2,12 @@
   "name": "crud-api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:prod": "tsc && node dist/index.js",
+    "start:dev": "nodemon",
+    "start:multi": "ts-node ./src/multi/multi.ts",
+    "test": "mocha --require @babel/register src/test/test.js --timeout 10000"
   },
   "repository": {
     "type": "git",
@@ -17,8 +20,23 @@
   },
   "homepage": "https://github.com/Aiyoy/crud-ari#readme",
   "devDependencies": {
+    "@babel/cli": "^7.7.4",
+    "@babel/core": "^7.7.4",
+    "@babel/preset-env": "^7.7.4",
+    "@babel/register": "^7.7.4",
+    "@types/mocha": "^9.1.1",
+    "@types/uuid": "^8.3.4",
+    "cross-env": "^7.0.3",
     "nodemon": "^2.0.16",
+    "prettier": "2.7.0",
     "ts-node": "^10.8.1",
     "typescript": "^4.7.3"
+  },
+  "dependencies": {
+    "chai": "^4.3.6",
+    "chai-http": "^4.3.0",
+    "dotenv": "^16.0.1",
+    "mocha": "^10.0.0",
+    "uuid": "^8.3.2"
   }
 }
