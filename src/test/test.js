@@ -3,7 +3,7 @@ process.env.NODE_ENV = 'test';
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 
-import { server } from '../../dist/index';
+import { server } from '../../dist/server';
 
 import source from '../data/data.json';
 import testSource from '../test/data-test.json';

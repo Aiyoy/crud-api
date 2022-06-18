@@ -10,15 +10,12 @@ const data_json_1 = __importDefault(require("../data/data.json"));
 const data_test_json_1 = __importDefault(require("../test/data-test.json"));
 let users;
 if (process.env.NODE_ENV === 'test') {
-    console.log('test', process.env.NODE_ENV);
     users = data_test_json_1.default;
 }
 else {
     users = data_json_1.default;
-    console.log('server', process.env.NODE_ENV);
 }
 function findAllUsers() {
-    console.log('Server', process.env.NODE_ENV, users);
     return new Promise((resolve, reject) => {
         resolve(users);
     });
