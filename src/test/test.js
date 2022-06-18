@@ -4,7 +4,6 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 
 import { server } from '../../dist/index';
-// import users from './data-test.json';
 
 import source from '../data/data.json';
 import testSource from '../test/data-test.json';
@@ -14,8 +13,6 @@ let users = source;
 if (process.env.NODE_ENV === 'test') {
   users = testSource;
 }
-
-console.log('Test', process.env.NODE_ENV, users);
 
 const should = chai.should();
 

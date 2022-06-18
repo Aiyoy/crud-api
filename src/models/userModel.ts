@@ -9,15 +9,12 @@ import testSource from '../test/data-test.json';
 let users: FullUserType[];
 
 if (process.env.NODE_ENV === 'test') {
-  console.log('test', process.env.NODE_ENV);
   users = testSource;
 } else {
   users = source;
-  console.log('server', process.env.NODE_ENV);
 }
 
 function findAllUsers(): Promise<FullUserType[]> {
-  console.log('Server', process.env.NODE_ENV, users);
   return new Promise((resolve, reject) => {
     resolve(users);
   })
