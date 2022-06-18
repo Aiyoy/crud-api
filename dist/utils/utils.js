@@ -6,8 +6,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getPostData = exports.writeDataToFile = void 0;
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
+let fileName = '../data/data.json';
+if (process.env.NODE_ENV === 'test') {
+    fileName = '../test/data-test.json';
+}
 function writeDataToFile(content) {
-    fs_1.default.writeFileSync(path_1.default.join(__dirname, '../data/data.json'), JSON.stringify(content), 'utf8');
+    fs_1.default.writeFileSync(path_1.default.join(__dirname, fileName), JSON.stringify(content), 'utf8');
 }
 exports.writeDataToFile = writeDataToFile;
 function getPostData(req) {

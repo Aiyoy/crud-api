@@ -12,6 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.server = void 0;
 const http_1 = __importDefault(require("http"));
 require("dotenv/config");
 const controllers_1 = require("./controllers/controllers");
@@ -39,6 +40,7 @@ const server = http_1.default.createServer((req, res) => __awaiter(void 0, void 
         res.end(JSON.stringify({ message: 'Route Not Found' }));
     }
 }));
+exports.server = server;
 const port = process.env.PORT || 8000;
 server.listen(port, () => {
     console.log(`Server running on port ${port}`);

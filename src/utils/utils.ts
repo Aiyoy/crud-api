@@ -4,8 +4,14 @@ import { IncomingMessage } from 'http';
 
 import { FullUserType } from '../types';
 
+let fileName = '../data/data.json';
+
+if (process.env.NODE_ENV === 'test') {
+  fileName = '../test/data-test.json';
+}
+
 function writeDataToFile(content: FullUserType[]) {
-  fs.writeFileSync(path.join(__dirname, '../data/data.json'), JSON.stringify(content), 'utf8');
+  fs.writeFileSync(path.join(__dirname, fileName), JSON.stringify(content), 'utf8');
 }
 
 function getPostData(req: IncomingMessage) {
