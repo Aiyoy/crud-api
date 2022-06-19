@@ -3,36 +3,40 @@ import { v4 as uuidv4 } from 'uuid';
 import { writeDataToFile } from '../utils/utils';
 import { UserType, FullUserType } from '../types';
 
-import source from '../data/data.json';
-import testSource from '../test/data-test.json';
-
-let users: FullUserType[];
-
-if (process.env.NODE_ENV === 'test') {
-  users = testSource;
-} else {
-  users = source;
-}
+import users from '../data/data.json';
+import testUsers from '../test/data-test.json';
 
 function findAllUsers(): Promise<FullUserType[]> {
   return new Promise((resolve, reject) => {
-    resolve(users);
+    if (process.env.NODE_ENV !== 'test') {
+      resolve(users);
+    } else {
+      resolve(testUsers);
+    }
   })
 }
 
 function findUserById(id: string): Promise<FullUserType | undefined> {
   return new Promise((resolve, reject) => {
+    if (process.env.NODE_ENV !== 'test') {
       const user: FullUserType | undefined = users.find((user) => user.id === id)
       resolve(user)
+    } else {
+      const user: FullUserType | undefined = testUsers.find((user) => user.id === id)
+      resolve(user)
+    }
   })
 }
 
 function create(user: UserType): Promise<FullUserType> {
   return new Promise((resolve, reject) => {
-    const newUser: FullUserType = {id: uuidv4(), ...user}
-    users.push(newUser);
+    const newUser: FullUserType = {id: uuidv4(), ...user};
     if (process.env.NODE_ENV !== 'test') {
-      writeDataToFile(users);
+      users.push(newUser);
+      writeDataToFile(users, '../data/data.json');
+    } else {
+      testUsers.push(newUser);
+      writeDataToFile(users, '../test/data-test.json');
     }
     resolve(newUser);
   })
@@ -40,20 +44,28 @@ function create(user: UserType): Promise<FullUserType> {
 
 function update(id: string, user: UserType): Promise<FullUserType> {
   return new Promise((resolve, reject) => {
-    const index: number = users.findIndex((user) => user.id === id)
-    users[index] = {id, ...user}
     if (process.env.NODE_ENV !== 'test') {
-      writeDataToFile(users);
+      const index: number = users.findIndex((user) => user.id === id)
+      users[index] = {id, ...user}
+      writeDataToFile(users, '../data/data.json');
+      resolve(users[index])
+    } else {
+      const index: number = testUsers.findIndex((user) => user.id === id)
+      testUsers[index] = {id, ...user}
+      writeDataToFile(testUsers, '../test/data-test.json');
+      resolve(testUsers[index])
     }
-    resolve(users[index])
   })
 }
 
 function remove(id: string): Promise<void> {
   return new Promise((resolve, reject) => {
-    const filterUsers = users.filter((user) => user.id !== id);
     if (process.env.NODE_ENV !== 'test') {
-      writeDataToFile(filterUsers);
+      const filterUsers = users.filter((user) => user.id !== id);
+      writeDataToFile(filterUsers, '../data/data.json');
+    } else {
+      const filterUsers = testUsers.filter((user) => user.id !== id);
+      writeDataToFile(filterUsers, '../test/data-test.json');
     }
     resolve();
   });

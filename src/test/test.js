@@ -8,12 +8,6 @@ import { server } from '../../dist/server';
 import source from '../data/data.json';
 import testSource from '../test/data-test.json';
 
-let users = source;
-
-if (process.env.NODE_ENV === 'test') {
-  users = testSource;
-}
-
 const should = chai.should();
 
 chai.use(chaiHttp);
@@ -21,8 +15,11 @@ chai.use(chaiHttp);
 describe('Users API', () => {
   const successCode = 200;
   const deleteCode = 404;
-  const usersNum = source.length;
+  const usersNum = testSource.length;
   const testUserId = '7ddb8c10-c5f3-4099-ae21-d96643643b20';
+  const testUsername = 'Username';
+  const testAge = 24;
+  const testHobbies= ["hobby1", "hobby2"];
 
   const user = {
       username: 'Test User',
@@ -73,9 +70,9 @@ describe('Users API', () => {
           res.should.have.status(successCode);
           res.body.should.be.a('object');
           res.body.should.have.property('id').eql(testUserId);
-          res.body.should.have.property('age');
-          res.body.should.have.property('hobbies');
-          res.body.should.have.property('username');
+          res.body.should.have.property('age').eql(testAge);
+          res.body.should.have.property('hobbies').eql(testHobbies);
+          res.body.should.have.property('username').eql(testUsername);
           done();
         });
     });
