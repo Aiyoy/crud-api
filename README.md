@@ -1,12 +1,16 @@
 # crud-ari
 
-###Repository clone: git clone https://github.com/Aiyoy/crud-api.git
-###Install dependencies: npm install
-###Checkout the development branch: git checkout develop
+### Repository clone: git clone https://github.com/Aiyoy/crud-api.git
 
-###Run application: npm run start:prod
-###Running tests: npm run test
-###Run application on all CPUs: npm run start:multi
+### Install dependencies: npm install
+
+### Checkout the development branch: git checkout develop
+
+### Run application: npm run start:prod
+
+### Running tests: npm run test
+
+### Run application on all CPUs: npm run start:multi
 
 Host: http://localhost:8000/api/users
 
